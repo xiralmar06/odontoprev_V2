@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odontopediatría · Sonrisas Felices</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint:#00BFA5; --mint-dark:#00897B; --mint-light:#B2DFDB; --mint-xlight:#E0F2F1;
+  --coral:#FF6B6B; --coral-light:#FFE8E8;
+  --yellow:#FFD54F; --yellow-light:#FFF8E1;
+  --purple:#7C4DFF; --purple-light:#EDE7F6;
+  --dark:#1A2E2C; --text:#2C4A47; --muted:#7A9E9B;
+  --bg:#F5FFFE; --white:#FFFFFF;
+  --radius:20px; --shadow:0 4px 24px rgba(0,191,165,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+header{background:var(--white);padding:0 20px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,191,165,0.08);}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--mint),var(--mint-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:800;color:var(--dark);line-height:1.1;}
+.logo-text span{color:var(--mint-dark);}
+.logo-sub{font-size:0.58rem;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.hero{background:linear-gradient(160deg,#E0FAF7 0%,#FFF9F0 60%,#FFF0F0 100%);padding:32px 22px 28px;position:relative;overflow:hidden;}
+.bubble{position:absolute;border-radius:50%;opacity:0.18;}
+.b1{width:180px;height:180px;background:var(--mint);top:-60px;right:-50px;}
+.b2{width:80px;height:80px;background:var(--coral);bottom:10px;right:40px;}
+.b3{width:50px;height:50px;background:var(--yellow);top:20px;left:10px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--mint-light);color:var(--mint-dark);font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,191,165,0.12);}
+.hero h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:var(--dark);line-height:1.2;margin-bottom:8px;position:relative;z-index:1;}
+.hero h1 em{font-style:normal;color:var(--mint-dark);}
+.hero p{color:var(--muted);font-size:0.88rem;line-height:1.65;margin-bottom:22px;font-weight:500;max-width:320px;}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,var(--mint),var(--mint-dark));color:white;border:none;padding:12px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(0,137,123,0.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,137,123,0.35);}
+.btn-soft{background:white;color:var(--mint-dark);border:2px solid var(--mint-light);padding:10px 18px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-soft:hover{border-color:var(--mint);background:var(--mint-xlight);}
+.quick-row{display:flex;gap:9px;padding:18px 18px 0;overflow-x:auto;scrollbar-width:none;}
+.quick-row::-webkit-scrollbar{display:none;}
+.quick-card{flex:none;background:var(--white);border-radius:14px;padding:12px 10px;width:88px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;border:2px solid transparent;}
+.quick-card:hover{transform:translateY(-3px);border-color:var(--mint-light);}
+.quick-card .qc-icon{font-size:1.3rem;margin-bottom:4px;}
+.quick-card .qc-label{font-size:0.6rem;font-weight:700;color:var(--text);line-height:1.3;}
+.nav-tabs{display:flex;background:var(--white);border-bottom:2px solid var(--mint-xlight);overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;z-index:90;margin-top:14px;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab-btn{flex:none;padding:12px 13px;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:0.74rem;font-weight:700;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:4px;}
+.tab-btn.active{color:var(--mint-dark);border-bottom-color:var(--mint-dark);}
+.panel{display:none;padding:20px 16px;animation:fadeUp .3s ease;}
+.panel.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800;color:var(--dark);margin-bottom:4px;}
+.section-sub{font-size:0.8rem;color:var(--muted);margin-bottom:18px;font-weight:500;}
+.doctor-card{background:linear-gradient(135deg,var(--mint-dark),#004D40);border-radius:var(--radius);padding:22px 18px;color:white;margin-bottom:16px;position:relative;overflow:hidden;}
+.doctor-card::after{content:'🦷';position:absolute;font-size:5rem;right:-8px;bottom:-12px;opacity:0.08;}
+.doctor-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.doctor-avatar{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,0.15);border:3px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;}
+.doctor-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:800;}
+.doctor-title{font-size:0.72rem;color:var(--mint-light);font-weight:600;margin-top:2px;}
+.doctor-bio{font-size:0.79rem;color:rgba(255,255,255,0.82);line-height:1.65;font-weight:500;}
+.doctor-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.dbadge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:0.64rem;font-weight:700;padding:4px 10px;border-radius:50px;}
+.ph-guide{background:var(--yellow-light);border:2px dashed #FFB300;border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:9px;}
+.ph-guide .phi{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.ph-guide .pht{font-size:0.74rem;color:#795548;line-height:1.6;font-weight:600;}
+.ph-guide .pht strong{display:block;color:#5D4037;margin-bottom:2px;font-size:0.76rem;}
+code{font-family:monospace;background:#FFE082;padding:1px 5px;border-radius:4px;font-size:0.7rem;color:#4E342E;}
+.gallery-label{font-size:0.75rem;font-weight:800;color:var(--dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.gallery-label::after{content:'';flex:1;height:1.5px;background:var(--mint-xlight);border-radius:2px;}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.photo-slot{border-radius:14px;overflow:hidden;position:relative;border:2px dashed #B2DFDB;background:var(--mint-xlight);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;transition:all .2s;cursor:pointer;}
+.photo-slot:hover{border-color:var(--mint);transform:scale(1.02);}
+.photo-slot-icon{font-size:1.5rem;margin-bottom:4px;}
+.photo-slot-label{font-size:0.68rem;font-weight:700;color:var(--mint-dark);}
+.photo-slot-hint{font-size:0.58rem;color:var(--muted);margin-top:2px;font-weight:600;}
+.video-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;}
+.video-thumb{width:100%;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:pointer;overflow:hidden;}
+.vt0{background:linear-gradient(135deg,#1A2E2C,#2E4A47);}
+.vt1{background:linear-gradient(135deg,#1A237E,#283593);}
+.vt2{background:linear-gradient(135deg,#1B5E20,#2E7D32);}
+.vt3{background:linear-gradient(135deg,#880E4F,#AD1457);}
+.video-thumb-inner{text-align:center;position:relative;z-index:1;}
+.play-btn{width:58px;height:58px;background:rgba(255,255,255,0.18);border:3px solid rgba(255,255,255,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 9px;transition:all .2s;backdrop-filter:blur(4px);}
+.video-thumb:hover .play-btn{background:var(--mint);border-color:var(--mint);transform:scale(1.1);}
+.video-thumb-label{color:white;font-size:0.78rem;font-weight:700;}
+.video-thumb-sub{color:rgba(255,255,255,0.6);font-size:0.65rem;margin-top:2px;}
+.vbg{position:absolute;font-size:6rem;opacity:0.07;right:-10px;bottom:-15px;}
+.video-info{padding:14px 16px;}
+.video-title{font-size:0.88rem;font-weight:800;color:var(--dark);margin-bottom:4px;}
+.video-desc{font-size:0.76rem;color:var(--muted);line-height:1.55;font-weight:500;}
+.video-tag{display:inline-block;background:var(--mint-xlight);color:var(--mint-dark);font-size:0.62rem;font-weight:700;padding:3px 9px;border-radius:50px;margin-top:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.faq-cat{font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin:18px 0 9px;display:flex;align-items:center;gap:7px;color:var(--mint-dark);}
+.faq-cat::after{content:'';flex:1;height:1.5px;background:var(--mint-xlight);border-radius:2px;}
+.faq-item{background:var(--white);border-radius:14px;margin-bottom:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,191,165,0.07);border:2px solid transparent;transition:border-color .2s;}
+.faq-item.open{border-color:var(--mint-light);}
+.faq-q{width:100%;background:none;border:none;padding:14px 15px;text-align:left;font-family:'Nunito',sans-serif;font-size:0.83rem;font-weight:700;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.faq-q-left{display:flex;align-items:center;gap:9px;}
+.faq-q-emoji{width:30px;height:30px;background:var(--mint-xlight);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.faq-item.open .faq-q-emoji{background:var(--mint);}
+.chev{width:22px;height:22px;border-radius:50%;background:var(--mint-xlight);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--mint-dark);flex-shrink:0;transition:all .3s;}
+.faq-item.open .chev{background:var(--mint);color:white;transform:rotate(180deg);}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-ans{max-height:250px;}
+.faq-ans-inner{padding:11px 15px 14px 54px;font-size:0.8rem;color:var(--text);line-height:1.7;font-weight:500;border-top:1.5px solid var(--mint-xlight);}
+.form-card{background:var(--white);border-radius:var(--radius);padding:20px 16px;box-shadow:var(--shadow);margin-bottom:14px;}
+.form-row{margin-bottom:14px;}
+.form-label{display:block;font-size:0.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.form-input,.form-select,.form-textarea{width:100%;padding:11px 14px;border:2px solid #E0EFED;border-radius:11px;font-family:'Nunito',sans-serif;font-size:0.86rem;color:var(--dark);background:var(--bg);transition:border-color .2s;outline:none;font-weight:600;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--mint);background:white;}
+.form-textarea{resize:none;height:80px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.motivo-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.motivo-chip{display:flex;align-items:center;gap:7px;padding:8px 11px;background:var(--bg);border:2px solid #E0EFED;border-radius:10px;cursor:pointer;font-size:0.76rem;font-weight:700;color:var(--text);transition:all .2s;}
+.motivo-chip input{accent-color:var(--mint);}
+.motivo-chip:has(input:checked){border-color:var(--mint);background:var(--mint-xlight);color:var(--mint-dark);}
+.submit-btn{width:100%;background:linear-gradient(135deg,var(--mint),var(--mint-dark));color:white;border:none;padding:14px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:800;cursor:pointer;transition:all .25s;margin-top:6px;box-shadow:0 4px 16px rgba(0,137,123,0.25);}
+.submit-btn:hover{transform:translateY(-2px);}
+.success-card{background:var(--white);border-radius:var(--radius);padding:36px 22px;text-align:center;box-shadow:var(--shadow);display:none;}
+.success-card.show{display:block;}
+.success-anim{font-size:3.2rem;margin-bottom:10px;}
+.success-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:var(--dark);margin-bottom:7px;}
+.success-text{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:500;}
+.contact-hero{background:linear-gradient(135deg,var(--mint-dark),#004D40);border-radius:var(--radius);padding:22px 18px;color:white;margin-bottom:14px;position:relative;overflow:hidden;}
+.contact-hero::before{content:'🦷';position:absolute;font-size:5rem;right:-8px;bottom:-12px;opacity:0.08;}
+.contact-hero h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:14px;font-weight:800;}
+.contact-item{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:0.82rem;color:rgba(255,255,255,0.8);}
+.contact-item:last-child{border-bottom:none;}
+.ci-icon{width:34px;height:34px;background:rgba(255,255,255,0.12);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.ci-info strong{display:block;font-size:0.68rem;color:var(--mint-light);margin-bottom:1px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;}
+.info-card{background:var(--white);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:14px;}
+.info-card h3{font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:11px;}
+.info-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--mint-xlight);font-size:0.8rem;font-weight:600;color:var(--text);}
+.info-row:last-child{border-bottom:none;}
+.info-row span:first-child{font-size:0.95rem;width:22px;text-align:center;}
+.tip-card{background:var(--yellow-light);border-radius:14px;padding:14px 16px;border-left:4px solid var(--yellow);margin-top:4px;}
+.tip-title{font-size:0.82rem;font-weight:800;color:#795548;margin-bottom:5px;}
+.tip-text{font-size:0.78rem;color:#8D6E63;line-height:1.65;font-weight:500;}
+
+/* CUENTO */
+.story-container{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px;}
+.story-scene{min-height:210px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:24px 20px;}
+.sc0{background:linear-gradient(135deg,#E3F2FD,#E1F5FE);}
+.sc1{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);}
+.sc2{background:linear-gradient(135deg,#FCE4EC,#F8BBD0);}
+.sc3{background:linear-gradient(135deg,#E8F5E9,#DCEDC8);}
+.sc4{background:linear-gradient(135deg,#EDE7F6,#E8EAF6);}
+.sc5{background:linear-gradient(135deg,#E0F2F1,#B2DFDB);}
+.scene-bg-emoji{position:absolute;font-size:8rem;opacity:0.08;right:-10px;bottom:-15px;pointer-events:none;}
+.scene-content{text-align:center;position:relative;z-index:1;}
+.scene-main-emoji{font-size:3.8rem;margin-bottom:9px;display:block;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.scene-title{font-family:'Fredoka One',cursive;font-size:1.25rem;color:var(--dark);margin-bottom:6px;}
+.scene-text{font-size:0.81rem;color:var(--text);line-height:1.65;font-weight:600;max-width:280px;margin:0 auto;}
+.story-footer{padding:14px 16px;}
+.story-progress{display:flex;gap:5px;margin-bottom:13px;justify-content:center;}
+.story-dot{width:7px;height:7px;border-radius:50%;background:#DDE8E7;transition:all .3s;}
+.story-dot.active{background:var(--mint);width:22px;border-radius:4px;}
+.story-nav{display:flex;gap:9px;}
+.story-btn{flex:1;padding:11px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.83rem;font-weight:700;cursor:pointer;transition:all .2s;border:none;}
+.story-btn-back{background:var(--mint-xlight);color:var(--mint-dark);}
+.story-btn-next{background:linear-gradient(135deg,var(--mint),var(--mint-dark));color:white;box-shadow:0 3px 12px rgba(0,137,123,0.25);}
+.story-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* JUEGO */
+.game-card{background:var(--white);border-radius:var(--radius);padding:22px 16px;box-shadow:var(--shadow);margin-bottom:14px;text-align:center;}
+.game-title{font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--dark);margin-bottom:3px;}
+.game-sub{font-size:0.76rem;color:var(--muted);margin-bottom:18px;font-weight:600;}
+.stars-row{display:flex;justify-content:center;gap:5px;margin-bottom:16px;}
+.star{font-size:1.5rem;filter:grayscale(1);transition:all .4s;}
+.star.lit{filter:grayscale(0);animation:starPop .4s ease;}
+@keyframes starPop{0%{transform:scale(0)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+.timer-wrap{position:relative;width:170px;height:170px;margin:0 auto 18px;}
+.timer-svg{width:170px;height:170px;transform:rotate(-90deg);}
+.timer-bg-c{fill:none;stroke:#E0EFED;stroke-width:10;}
+.timer-prog{fill:none;stroke:var(--mint);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .5s ease,stroke .3s;stroke-dasharray:502;stroke-dashoffset:0;}
+.timer-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.timer-emoji{font-size:2.6rem;line-height:1;margin-bottom:3px;}
+.timer-num{font-family:'Fredoka One',cursive;font-size:1.9rem;color:var(--dark);line-height:1;}
+.timer-zone{font-size:0.62rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.zone-item{background:var(--bg);border-radius:12px;padding:9px 11px;border:2px solid #E0EFED;transition:all .3s;text-align:center;}
+.zone-item.done{border-color:var(--mint);background:var(--mint-xlight);}
+.zone-item.active-z{border-color:var(--yellow);background:var(--yellow-light);animation:pulseBorder .8s ease infinite;}
+@keyframes pulseBorder{0%,100%{border-color:var(--yellow)}50%{border-color:#FFA000}}
+.zone-ico{font-size:1.1rem;margin-bottom:2px;}
+.zone-nm{font-size:0.65rem;font-weight:700;color:var(--text);}
+.zone-ck{font-size:0.82rem;margin-top:2px;color:var(--mint);}
+.game-btns{display:flex;gap:9px;margin-bottom:14px;}
+.game-btn{flex:1;padding:11px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.84rem;font-weight:800;cursor:pointer;transition:all .25s;border:none;}
+.game-btn-start{background:linear-gradient(135deg,var(--mint),var(--mint-dark));color:white;box-shadow:0 4px 14px rgba(0,137,123,0.3);}
+.game-btn-reset{background:var(--mint-xlight);color:var(--mint-dark);}
+.game-btn:hover{transform:translateY(-2px);}
+.game-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+.wa-float{position:fixed;bottom:22px;right:18px;z-index:200;background:#25D366;color:white;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;transition:all .25s;border:none;}
+.wa-float:hover{transform:scale(1.1);}
+.bottom-space{height:36px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">🦷</div>
+    <div>
+      <div class="logo-text">Odonto<span>pediatría</span></div>
+      <div class="logo-sub">Sonrisas felices</div>
+    </div>
+  </div>
+  <div style="font-size:1.3rem">😊</div>
+</header>
+
+<div class="hero">
+  <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+  <div class="hero-badge">🦷 Especialista en niños</div>
+  <h1>Cuidamos la sonrisa de <em>tus pequeños</em></h1>
+  <p>Atención odontológica especializada para niños, en un ambiente seguro, divertido y sin miedo.</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="switchTab('cita')">📅 Agendar cita</button>
+    <button class="btn-soft" onclick="switchTab('ninos')">🎮 Zona niños</button>
+  </div>
+</div>
+
+<div class="quick-row">
+  <div class="quick-card" onclick="switchTab('nosotros')"><div class="qc-icon">👩‍⚕️</div><div class="qc-label">La doctora</div></div>
+  <div class="quick-card" onclick="switchTab('servicios')"><div class="qc-icon">🔬</div><div class="qc-label">Servicios</div></div>
+  <div class="quick-card" onclick="switchTab('galeria')"><div class="qc-icon">📸</div><div class="qc-label">Galería</div></div>
+  <div class="quick-card" onclick="switchTab('videos')"><div class="qc-icon">🎬</div><div class="qc-label">Videos</div></div>
+  <div class="quick-card" onclick="switchTab('ninos')"><div class="qc-icon">🎮</div><div class="qc-label">Zona niños</div></div>
+  <div class="quick-card" onclick="switchTab('faq')"><div class="qc-icon">❓</div><div class="qc-label">Preguntas</div></div>
+  <div class="quick-card" onclick="switchTab('cita')"><div class="qc-icon">📅</div><div class="qc-label">Cita</div></div>
+</div>
+
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="switchTab('nosotros')" id="tab-nosotros">👩‍⚕️ Doctora</button>
+  <button class="tab-btn" onclick="switchTab('servicios')" id="tab-servicios">🔬 Servicios</button>
+  <button class="tab-btn" onclick="switchTab('galeria')" id="tab-galeria">📸 Galería</button>
+  <button class="tab-btn" onclick="switchTab('videos')" id="tab-videos">🎬 Videos</button>
+  <button class="tab-btn" onclick="switchTab('ninos')" id="tab-ninos">🎮 Niños</button>
+  <button class="tab-btn" onclick="switchTab('faq')" id="tab-faq">❓ FAQ</button>
+  <button class="tab-btn" onclick="switchTab('cita')" id="tab-cita">📅 Agendar</button>
+  <button class="tab-btn" onclick="switchTab('contacto')" id="tab-contacto">📞 Contacto</button>
+</div>
+
+<!-- NOSOTROS -->
+<div class="panel active" id="panel-nosotros">
+  <div class="section-title">La doctora</div>
+  <div class="section-sub">Conoce a tu especialista de confianza</div>
+  <div class="doctor-card">
+    <div class="doctor-top">
+      <div class="doctor-avatar">👩‍⚕️</div>
+      <div>
+        <div class="doctor-name">Dra. Tu Nombre</div>
+        <div class="doctor-title">Odontopediatra · Especialista en niños</div>
+      </div>
+    </div>
+    <div class="doctor-bio">Apasionada por la salud bucal infantil y el bienestar de cada pequeño paciente. Mi enfoque es crear experiencias positivas para que los niños crezcan sin miedo al dentista.</div>
+    <div class="doctor-badges">
+      <span class="dbadge">🎓 Odontología</span>
+      <span class="dbadge">👶 Odontopediatría</span>
+      <span class="dbadge">❤️ +10 años exp.</span>
+    </div>
+  </div>
+  <div class="ph-guide">
+    <div class="phi">💡</div>
+    <div class="pht"><strong>Para personalizar:</strong>Reemplaza "Dra. Tu Nombre" con tu nombre real, actualiza la bio y cambia el emoji 👩‍⚕️ por tu foto real.</div>
+  </div>
+  <div class="tip-card">
+    <div class="tip-title">🌟 Mi filosofía</div>
+    <div class="tip-text">Creo que cada visita al odontopediatra debe ser una aventura divertida, no algo temido. Por eso trabajo con técnicas especiales de comunicación adaptadas a cada edad.</div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<div class="panel" id="panel-servicios">
+  <div class="section-title">Nuestros tratamientos</div>
+  <div class="section-sub">Todo lo que necesita la salud bucal de tu hijo</div>
+  <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:18px;">
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--mint-xlight);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🔍</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Revisión y diagnóstico</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Examen completo de dientes, encías y tejidos blandos.</div><span style="display:inline-block;background:var(--mint-xlight);color:var(--mint-dark);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Cada 6 meses</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--coral-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🦷</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Tratamiento de caries</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Restauraciones estéticas y seguras para dientes de leche y permanentes.</div><span style="display:inline-block;background:var(--coral-light);color:var(--coral);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Sin dolor</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--yellow-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🛡️</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Selladores de fisuras</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Protección preventiva sobre molares. Indoloro y muy efectivo.</div><span style="display:inline-block;background:var(--yellow-light);color:#F57F17;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Preventivo</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">✨</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Aplicación de flúor</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Refuerzo del esmalte para máxima protección.</div><span style="display:inline-block;background:var(--purple-light);color:var(--purple);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Protección</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#E8F5E9;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🌟</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Profilaxis (Limpieza)</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Limpieza profesional y enseñanza de técnicas correctas.</div><span style="display:inline-block;background:#E8F5E9;color:#2E7D32;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Higiene</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:var(--radius);padding:15px 13px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:44px;height:44px;border-radius:12px;background:#FFF3E0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🚨</div>
+      <div><div style="font-size:0.9rem;font-weight:800;color:var(--dark);margin-bottom:3px;">Urgencias dentales</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.55;font-weight:500;">Atención de golpes, fracturas, dolor agudo y dientes caídos.</div><span style="display:inline-block;background:#FFF3E0;color:#E65100;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:50px;margin-top:6px;">Prioritario</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERÍA -->
+<div class="panel" id="panel-galeria">
+  <div class="section-title">Galería del consultorio</div>
+  <div class="section-sub">Un espacio pensado para que los niños se sientan en casa</div>
+  <div class="ph-guide">
+    <div class="phi">📸</div>
+    <div class="pht"><strong>¿Cómo añadir tus fotos?</strong>Reemplaza cada bloque con <code>&lt;img src="tu-foto.jpg"&gt;</code>. Puedes subir tus imágenes a Google Drive o WhatsApp Web y copiar el link.</div>
+  </div>
+  <div class="gallery-label">🏥 El consultorio</div>
+  <div class="gallery-grid">
+    <div class="photo-slot"><div class="photo-slot-icon">🏥</div><div class="photo-slot-label">Sala de espera</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+    <div class="photo-slot"><div class="photo-slot-icon">🦷</div><div class="photo-slot-label">Área de atención</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+    <div class="photo-slot"><div class="photo-slot-icon">🎨</div><div class="photo-slot-label">Zona de juegos</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+    <div class="photo-slot"><div class="photo-slot-icon">🔬</div><div class="photo-slot-label">Equipos modernos</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+  </div>
+  <div class="gallery-label">👩‍⚕️ La especialista</div>
+  <div class="gallery-grid">
+    <div class="photo-slot"><div class="photo-slot-icon">😊</div><div class="photo-slot-label">Foto profesional</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+    <div class="photo-slot"><div class="photo-slot-icon">👶</div><div class="photo-slot-label">Con pacientes</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+  </div>
+  <div class="gallery-label">😁 Antes y después</div>
+  <div class="gallery-grid">
+    <div class="photo-slot"><div class="photo-slot-icon">🌟</div><div class="photo-slot-label">Caso clínico 1</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+    <div class="photo-slot"><div class="photo-slot-icon">✨</div><div class="photo-slot-label">Caso clínico 2</div><div class="photo-slot-hint">Tu foto aquí</div></div>
+  </div>
+</div>
+
+<!-- VIDEOS -->
+<div class="panel" id="panel-videos">
+  <div class="section-title">Videos informativos</div>
+  <div class="section-sub">Todo lo que necesitas saber, explicado con cariño</div>
+  <div class="ph-guide">
+    <div class="phi">🎬</div>
+    <div class="pht"><strong>¿Cómo añadir tus videos?</strong>Sube tu video a YouTube y reemplaza el <code>div.video-thumb</code> por <code>&lt;iframe src="https://youtube.com/embed/TU_ID"&gt;&lt;/iframe&gt;</code> con ancho 100% y alto 200px.</div>
+  </div>
+  <div class="video-card">
+    <div class="video-thumb vt0" onclick="alert('Aquí irá tu video de bienvenida')">
+      <div class="vbg">👩‍⚕️</div>
+      <div class="video-thumb-inner"><div class="play-btn">▶️</div><div class="video-thumb-label">Bienvenida al consultorio</div><div class="video-thumb-sub">Video tuyo · ~2 min</div></div>
+    </div>
+    <div class="video-info"><div class="video-title">👩‍⚕️ Mensaje de bienvenida</div><div class="video-desc">La doctora te explica cómo funciona el consultorio y qué esperar en la primera visita.</div><span class="video-tag">Para papás</span></div>
+  </div>
+  <div class="video-card">
+    <div class="video-thumb vt1" onclick="alert('Aquí irá tu video de cepillado')">
+      <div class="vbg">🪥</div>
+      <div class="video-thumb-inner"><div class="play-btn">▶️</div><div class="video-thumb-label">Técnica de cepillado</div><div class="video-thumb-sub">Tutorial · ~3 min</div></div>
+    </div>
+    <div class="video-info"><div class="video-title">🪥 ¿Cómo cepillar correctamente?</div><div class="video-desc">Paso a paso para enseñarle a tu hijo la técnica correcta según su edad.</div><span class="video-tag">Papás y niños</span></div>
+  </div>
+  <div class="video-card">
+    <div class="video-thumb vt2" onclick="alert('Aquí irá tu video de prevención')">
+      <div class="vbg">🍎</div>
+      <div class="video-thumb-inner"><div class="play-btn">▶️</div><div class="video-thumb-label">Prevención de caries</div><div class="video-thumb-sub">Consejos · ~4 min</div></div>
+    </div>
+    <div class="video-info"><div class="video-title">🍎 Cómo prevenir las caries</div><div class="video-desc">Alimentación, hábitos de higiene y visitas: todo para mantener los dientes sanos.</div><span class="video-tag">Para papás</span></div>
+  </div>
+  <div class="video-card">
+    <div class="video-thumb vt3" onclick="alert('Aquí irá tu video para niños')">
+      <div class="vbg">😊</div>
+      <div class="video-thumb-inner"><div class="play-btn">▶️</div><div class="video-thumb-label">¡El dentista es tu amigo!</div><div class="video-thumb-sub">Para niños · ~2 min</div></div>
+    </div>
+    <div class="video-info"><div class="video-title">😊 ¡Sin miedo al dentista!</div><div class="video-desc">Video divertido para mostrarle a tu hijo cómo es una visita. Ver antes de la cita.</div><span class="video-tag">Para niños</span></div>
+  </div>
+</div>
+
+<!-- ZONA NIÑOS -->
+<div class="panel" id="panel-ninos">
+  <div class="section-title" style="font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--mint-dark);">🎮 Zona de niños</div>
+  <div class="section-sub">¡Aprende y diviértete antes de tu visita!</div>
+
+  <!-- CUENTO -->
+  <div class="story-container">
+    <div class="story-scene sc0" id="story-scene">
+      <div class="scene-bg-emoji">🦷</div>
+      <div class="scene-content">
+        <span class="scene-main-emoji">🦷</span>
+        <div class="scene-title">¡Hola! Soy Moli</div>
+        <div class="scene-text">Soy Moli, un diente pequeño y brillante que vive en tu boca. ¡Hoy te voy a contar una historia de aventuras!</div>
+      </div>
+    </div>
+    <div class="story-footer">
+      <div style="font-size:0.68rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px;text-align:center;">📖 El cuento de Moli y el dragón dental</div>
+      <div class="story-progress" id="story-progress">
+        <div class="story-dot active"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div><div class="story-dot"></div>
+      </div>
+      <div class="story-nav">
+        <button class="story-btn story-btn-back" id="story-back" onclick="storyNav(-1)" disabled>← Anterior</button>
+        <button class="story-btn story-btn-next" id="story-next" onclick="storyNav(1)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUEGO -->
+  <div class="game-card">
+    <div class="game-title">🪥 ¡A cepillarse!</div>
+    <div class="game-sub">2 minutos · 4 zonas · ¡Gana estrellas!</div>
+    <div class="stars-row">
+      <span class="star" id="star1">⭐</span>
+      <span class="star" id="star2">⭐</span>
+      <span class="star" id="star3">⭐</span>
+    </div>
+    <div class="timer-wrap">
+      <svg class="timer-svg" viewBox="0 0 170 170">
+        <circle class="timer-bg-c" cx="85" cy="85" r="75"/>
+        <circle class="timer-prog" id="timer-prog" cx="85" cy="85" r="75"/>
+      </svg>
+      <div class="timer-inner">
+        <div class="timer-emoji" id="timer-emoji">🦷</div>
+        <div class="timer-num" id="timer-num">2:00</div>
+        <div class="timer-zone" id="timer-zone">¡Listo para empezar!</div>
+      </div>
+    </div>
+    <div class="zone-grid">
+      <div class="zone-item" id="zone-0"><div class="zone-ico">😬</div><div class="zone-nm">Dientes frontales</div><div class="zone-ck" id="zck-0">○</div></div>
+      <div class="zone-item" id="zone-1"><div class="zone-ico">◀️</div><div class="zone-nm">Lado izquierdo</div><div class="zone-ck" id="zck-1">○</div></div>
+      <div class="zone-item" id="zone-2"><div class="zone-ico">▶️</div><div class="zone-nm">Lado derecho</div><div class="zone-ck" id="zck-2">○</div></div>
+      <div class="zone-item" id="zone-3"><div class="zone-ico">👅</div><div class="zone-nm">Lengua y paladar</div><div class="zone-ck" id="zck-3">○</div></div>
+    </div>
+    <div class="game-btns">
+      <button class="game-btn game-btn-reset" onclick="resetGame()">🔄 Reiniciar</button>
+      <button class="game-btn game-btn-start" id="btn-start" onclick="startGame()">▶️ ¡Empezar!</button>
+    </div>
+    <div class="tip-card">
+      <div class="tip-title">💡 Tip de cepillado</div>
+      <div class="tip-text" id="brush-tip">El tiempo ideal es <strong>2 minutos</strong>. Divide ese tiempo entre las 4 zonas. ¡Usa el temporizador!</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="panel" id="panel-faq">
+  <div class="section-title">Preguntas frecuentes</div>
+  <div class="section-sub">Las dudas más comunes de los papás</div>
+  <div class="faq-cat">👶 Primera visita</div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">📅</div>¿A qué edad llevo a mi hijo por primera vez?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Se recomienda la primera visita alrededor del primer año de vida, cuando aparece el primer diente de leche. Cuanto antes mejor para establecer hábitos saludables.</div></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🔄</div>¿Cada cuánto tiempo deben ser las revisiones?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Al menos cada 6 meses. Las revisiones periódicas permiten detectar caries u otros problemas a tiempo.</div></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🤔</div>¿Qué pasa en la primera consulta?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Es de exploración y familiarización. Revisamos dientes, encías y tejidos blandos, y damos consejos de higiene. El objetivo es que el niño se sienta cómodo y seguro.</div></div></div>
+  <div class="faq-cat">🪥 Higiene</div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🧴</div>¿Cuánta pasta dental debo usar?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">De 0 a 3 años: tamaño de un grano de arroz. De 3 a 6 años: tamaño de un guisante. Enséñale a escupir sin enjuagar para aprovechar el flúor.</div></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">⏰</div>¿Cuántas veces al día deben cepillarse?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Al menos 3 veces al día. El nocturno es el más importante porque la saliva disminuye durante la noche.</div></div></div>
+  <div class="faq-cat">🍬 Caries</div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🛡️</div>¿Cómo prevengo las caries?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Buena higiene con cepillado 3 veces al día, limitar azúcares, revisiones cada 6 meses y selladores de flúor profesionales cuando la doctora lo recomiende.</div></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🦷</div>¿Caries en dientes de leche afectan los permanentes?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">No necesariamente. Con mejores hábitos, los dientes definitivos pueden salir completamente sanos.</div></div></div>
+  <div class="faq-cat">😨 Miedo al dentista</div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">💪</div>¿Cómo ayudo a mi hijo a no tener miedo?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Nunca uses al dentista como amenaza. Lleva al niño desde pequeño a revisiones de rutina. Un ambiente positivo crea confianza y elimina el miedo.</div></div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><div class="faq-q-left"><div class="faq-q-emoji">🧘</div>¿Cómo debo comportarme yo durante la cita?</div><div class="chev">▼</div></button><div class="faq-ans"><div class="faq-ans-inner">Mantén actitud relajada y positiva. Los niños captan la ansiedad. Evita decir "no va a doler". Deja que la doctora maneje la situación.</div></div></div>
+</div>
+
+<!-- CITA -->
+<div class="panel" id="panel-cita">
+  <div class="section-title">Agendar cita</div>
+  <div class="section-sub">Reserva en minutos, confirmamos por WhatsApp</div>
+  <div class="form-card" id="form-container">
+    <div class="form-row"><label class="form-label">Nombre del niño *</label><input type="text" class="form-input" placeholder="Ej: Sofía" id="f-nino"></div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0"><label class="form-label">Edad *</label><select class="form-select" id="f-edad"><option value="">Seleccionar...</option><option>0 - 2 años</option><option>3 - 5 años</option><option>6 - 8 años</option><option>9 - 12 años</option><option>13 - 17 años</option></select></div>
+      <div class="form-row" style="margin-bottom:0"><label class="form-label">Papá / Mamá *</label><input type="text" class="form-input" placeholder="Tu nombre" id="f-padre"></div>
+    </div>
+    <div class="form-row" style="margin-top:14px"><label class="form-label">WhatsApp *</label><input type="tel" class="form-input" placeholder="+57 300 000 0000" id="f-tel"></div>
+    <div class="form-row"><label class="form-label">Motivo *</label>
+      <div class="motivo-grid">
+        <label class="motivo-chip"><input type="checkbox"> 🔍 Revisión</label>
+        <label class="motivo-chip"><input type="checkbox"> 😣 Dolor</label>
+        <label class="motivo-chip"><input type="checkbox"> 🦷 Posible caries</label>
+        <label class="motivo-chip"><input type="checkbox"> 🚨 Golpe/trauma</label>
+        <label class="motivo-chip"><input type="checkbox"> ✨ Limpieza</label>
+        <label class="motivo-chip"><input type="checkbox"> 💬 Otro</label>
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0"><label class="form-label">Fecha</label><input type="date" class="form-input"></div>
+      <div class="form-row" style="margin-bottom:0"><label class="form-label">Hora</label><select class="form-select"><option value="">Seleccionar...</option><option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option></select></div>
+    </div>
+    <div class="form-row" style="margin-top:14px"><label class="form-label">¿Tiene miedo al dentista?</label><select class="form-select"><option value="">Seleccionar...</option><option>No, está tranquilo/a</option><option>Un poco nervioso/a</option><option>Sí, mucho miedo</option><option>Primera visita</option></select></div>
+    <button class="submit-btn" onclick="submitForm()">🦷 Confirmar cita</button>
+  </div>
+  <div class="success-card" id="success-card">
+    <div class="success-anim">🎉</div>
+    <div class="success-title">¡Cita solicitada!</div>
+    <div class="success-text">Te confirmaremos por <strong>WhatsApp</strong> en menos de 2 horas.<br>Recuerda llegar 10 minutos antes 😊</div>
+    <button class="btn-primary" style="margin:18px auto 0;display:flex;width:fit-content" onclick="resetForm()">📅 Nueva solicitud</button>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="panel" id="panel-contacto">
+  <div class="section-title">Contáctanos</div>
+  <div class="section-sub">Estamos aquí para ayudarte</div>
+  <div class="contact-hero">
+    <h3>📍 Información de contacto</h3>
+    <div class="contact-item"><div class="ci-icon">📱</div><div class="ci-info"><strong>WhatsApp</strong>+57 300 000 0000</div></div>
+    <div class="contact-item"><div class="ci-icon">📧</div><div class="ci-info"><strong>Correo</strong>consultorio@odontopediatria.com</div></div>
+    <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-info"><strong>Dirección</strong>Calle 00 # 00-00, Consultorio 000</div></div>
+    <div class="contact-item"><div class="ci-icon">🕐</div><div class="ci-info"><strong>Horario</strong>Lun–Vie 8AM–5PM · Sáb 8AM–12PM</div></div>
+  </div>
+  <div class="info-card">
+    <h3>✅ ¿Qué traer a la primera cita?</h3>
+    <div class="info-row"><span>📋</span><span>Carnet de vacunas del niño</span></div>
+    <div class="info-row"><span>🪥</span><span>Cepillo de dientes del niño</span></div>
+    <div class="info-row"><span>📁</span><span>Radiografías previas (si tiene)</span></div>
+    <div class="info-row"><span>💊</span><span>Lista de medicamentos que toma</span></div>
+    <div class="info-row"><span>⏰</span><span>Llegar 10 minutos antes</span></div>
+  </div>
+  <div class="info-card">
+    <h3>💳 Formas de pago</h3>
+    <div class="info-row"><span>💵</span><span>Efectivo</span></div>
+    <div class="info-row"><span>📲</span><span>Nequi / Daviplata / Transferencia</span></div>
+    <div class="info-row"><span>💳</span><span>Tarjeta débito y crédito</span></div>
+  </div>
+</div>
+
+<div class="bottom-space"></div>
+<button class="wa-float" title="WhatsApp">💬</button>
+
+<script>
+// TABS
+function switchTab(t){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+t).classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// FAQ
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+// FORM
+function submitForm(){
+  const nino=document.getElementById('f-nino').value;
+  const padre=document.getElementById('f-padre').value;
+  const tel=document.getElementById('f-tel').value;
+  const edad=document.getElementById('f-edad').value;
+  const checks=document.querySelectorAll('.motivo-grid input:checked');
+  if(!nino||!padre||!tel||!edad||checks.length===0){alert('Completa todos los campos (*) y selecciona el motivo.');return;}
+  document.getElementById('form-container').style.display='none';
+  document.getElementById('success-card').classList.add('show');
+}
+function resetForm(){
+  document.getElementById('form-container').style.display='block';
+  document.getElementById('success-card').classList.remove('show');
+  ['f-nino','f-padre','f-tel'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-edad').value='';
+  document.querySelectorAll('.motivo-grid input').forEach(i=>i.checked=false);
+}
+
+// CUENTO
+const STORY=[
+  {cls:'sc0',emoji:'🦷',title:'¡Hola! Soy Moli',text:'Soy Moli, un diente pequeño y brillante que vive en tu boca. ¡Hoy te voy a contar una historia de aventuras!'},
+  {cls:'sc1',emoji:'🐉',title:'El dragón del azúcar',text:'Había un dragón travieso llamado Carielo que adoraba los dulces y dejaba residuos pegajosos en los dientes. ¡Era muy molestoso!'},
+  {cls:'sc2',emoji:'😰',title:'Moli necesitaba ayuda',text:'Carielo empezó a hacerle hoyitos a Moli. ¡Eso dolía! Moli se puso muy triste y sus amigos los dientes estaban asustados.'},
+  {cls:'sc3',emoji:'👩‍⚕️',title:'¡Llegó la doctora!',text:'Entonces llegó la Doctora Sonrisa, la gran heroína de los dientes. Con sus instrumentos mágicos podía ver a Carielo y atraparlo.'},
+  {cls:'sc4',emoji:'🪥',title:'El arma secreta',text:'¿Sabes cuál es el arma secreta? ¡El cepillo de dientes! Con 2 minutos de cepillado, ¡el dragón Carielo no puede quedarse!'},
+  {cls:'sc5',emoji:'🌟',title:'¡Moli está feliz!',text:'Después de visitar a la doctora y cepillarse bien, Moli quedó brillante y feliz. ¡Tú también puedes tener dientes súper fuertes! 🦷✨'},
+];
+let sPage=0;
+function renderStory(){
+  const p=STORY[sPage];
+  const sc=document.getElementById('story-scene');
+  sc.className='story-scene '+p.cls;
+  sc.innerHTML=`<div class="scene-bg-emoji">${p.emoji}</div><div class="scene-content"><span class="scene-main-emoji">${p.emoji}</span><div class="scene-title">${p.title}</div><div class="scene-text">${p.text}</div></div>`;
+  const dots=document.getElementById('story-progress');
+  dots.innerHTML=STORY.map((_,i)=>`<div class="story-dot${i===sPage?' active':''}"></div>`).join('');
+  document.getElementById('story-back').disabled=sPage===0;
+  const nxt=document.getElementById('story-next');
+  if(sPage===STORY.length-1){nxt.textContent='🎮 ¡A jugar!';nxt.onclick=()=>{ const gt=document.getElementById('panel-ninos'); gt.scrollIntoView({behavior:'smooth'}); document.getElementById('game-card') && document.getElementById('game-card').scrollIntoView(); };}
+  else{nxt.textContent='Siguiente →';nxt.onclick=()=>storyNav(1);}
+}
+function storyNav(d){sPage=Math.max(0,Math.min(STORY.length-1,sPage+d));renderStory();}
+
+// GAME
+const TOTAL=120;
+const ZONES=['Dientes frontales','Lado izquierdo','Lado derecho','Lengua y paladar'];
+const ZEMOJIS=['😬','◀️','▶️','👅'];
+const TIPS=[
+  'El tiempo ideal es <strong>2 minutos</strong>. Divide entre las 4 zonas. ¡Usa el temporizador!',
+  '¡Cepilla los dientes de adelante con movimientos circulares suaves!',
+  '¡Ahora el lado izquierdo! No olvides los de atrás.',
+  '¡Excelente! Ahora el lado derecho con mucho cuidado.',
+  '¡Último paso! Cepilla la lengua suavemente.',
+  '🎉 ¡Lo lograste! Eres un campeón de los dientes. ¡Sonrisa brillante!'
+];
+let tLeft=TOTAL,tInterval=null,running=false,curZone=0;
+const CIRC=2*Math.PI*75;
+
+function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function updateCircle(){
+  const prog=document.getElementById('timer-prog');
+  prog.style.strokeDashoffset=CIRC*(1-tLeft/TOTAL);
+  const cols=['#00BFA5','#29B6F6','#7C4DFF','#FF6B6B'];
+  prog.style.stroke=cols[Math.min(curZone,3)];
+}
+function updZone(){
+  const zTime=TOTAL/4;
+  const nz=Math.min(3,Math.floor((TOTAL-tLeft)/zTime));
+  if(nz!==curZone){
+    document.getElementById('zone-'+curZone).classList.remove('active-z');
+    document.getElementById('zone-'+curZone).classList.add('done');
+    document.getElementById('zck-'+curZone).textContent='✅';
+    curZone=nz;
+    document.getElementById('brush-tip').innerHTML=TIPS[Math.min(curZone+1,TIPS.length-2)];
+  }
+  document.getElementById('zone-'+curZone).classList.add('active-z');
+  document.getElementById('timer-zone').textContent=ZONES[curZone];
+  document.getElementById('timer-emoji').textContent=ZEMOJIS[curZone];
+}
+function startGame(){
+  if(running)return;
+  running=true;
+  document.getElementById('btn-start').disabled=true;
+  document.getElementById('zone-0').classList.add('active-z');
+  document.getElementById('timer-zone').textContent=ZONES[0];
+  document.getElementById('timer-emoji').textContent='🪥';
+  document.getElementById('brush-tip').innerHTML=TIPS[1];
+  tInterval=setInterval(()=>{
+    tLeft--;
+    document.getElementById('timer-num').textContent=fmt(tLeft);
+    updateCircle();
+    updZone();
+    if(tLeft<=90)litStar(1);
+    if(tLeft<=60)litStar(2);
+    if(tLeft<=0){clearInterval(tInterval);running=false;finishGame();}
+  },1000);
+}
+function litStar(n){document.getElementById('star'+n).classList.add('lit');}
+function finishGame(){
+  document.getElementById('zone-'+curZone).classList.remove('active-z');
+  document.getElementById('zone-'+curZone).classList.add('done');
+  document.getElementById('zck-'+curZone).textContent='✅';
+  document.getElementById('timer-emoji').textContent='🏆';
+  document.getElementById('timer-zone').textContent='¡Completado!';
+  document.getElementById('timer-num').textContent='0:00';
+  litStar(3);
+  document.getElementById('brush-tip').innerHTML=TIPS[TIPS.length-1];
+  const btn=document.getElementById('btn-start');
+  btn.disabled=false;btn.textContent='🎉 ¡Completado!';
+}
+function resetGame(){
+  clearInterval(tInterval);running=false;tLeft=TOTAL;curZone=0;
+  document.getElementById('timer-num').textContent='2:00';
+  document.getElementById('timer-zone').textContent='¡Listo para empezar!';
+  document.getElementById('timer-emoji').textContent='🦷';
+  document.getElementById('brush-tip').innerHTML=TIPS[0];
+  document.getElementById('btn-start').disabled=false;
+  document.getElementById('btn-start').textContent='▶️ ¡Empezar!';
+  updateCircle();
+  for(let i=0;i<4;i++){const z=document.getElementById('zone-'+i);z.classList.remove('done','active-z');document.getElementById('zck-'+i).textContent='○';}
+  [1,2,3].forEach(n=>document.getElementById('star'+n).classList.remove('lit'));
+}
+
+// INIT
+renderStory();
+document.getElementById('timer-prog').style.strokeDasharray=CIRC;
+document.getElementById('timer-prog').style.strokeDashoffset=0;
+</script>
+</body>
+</html>
